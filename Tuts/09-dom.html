@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>DOM</title>
+</head>
+<style>
+    .subscribeBtn {
+        padding: 1%;
+        outline: none;
+        border: 1px solid #ce0202;
+        border-radius: 2.5rem;
+        background-color: rgb(253, 63, 63);
+        font-weight: bold;
+        color: white;
+    }
+
+    .Subscribed {
+        background-color: whitesmoke;
+        border: 1px solid #e2d2d2;
+        color: black;
+    }
+</style>
+<body>
+    <p>YouTube Subscribe Button</p>
+    <button class="subscribeBtn">Subscribe</button>
+
+    <p>Rock Paper Scissors</p>
+    <a href="06-booleans.html">Game</a>
+
+    <p>Amazon Shipping Calculator</p>
+    <p>Orders under $40 = +$10 Shipping</p>
+    <p>Orders over $40 = FREE Shipping</p>
+
+    <input type="number" id="Dillermand" placeholder="Cost of order"> <button class="calculateOrder">Calculate</button>
+    <p class="orderPrice"></p>
+
+    <script>
+        document.querySelector('.subscribeBtn').onclick = function() {
+            if (this.innerText === 'Subscribed') {
+                this.innerHTML = 'Subscribe';
+                this.classList.remove('Subscribed')
+            } else {
+                this.innerHTML = 'Subscribed'
+                this.classList.add('Subscribed')
+            }
+        };
+
+        document.querySelector('.calculateOrder').onclick = calculateOrder;
+        document.querySelector('input').onkeydown = function() { ( event.key === 'Enter') ? calculateOrder() : null; }
+
+        function calculateOrder() {
+            let price = Number(document.querySelector('input').value)
+
+            if ( price <= 40 && price !== 0 ) {
+                price+= 10
+            };
+
+            document.querySelector('.orderPrice').innerHTML = `$${price}`;
+        };
+
+    </script>
+</body>
+</html>

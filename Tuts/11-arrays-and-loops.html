@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrays And Loops</title>
+</head>
+<style>
+    div p {
+        margin: .5%;
+    }
+</style>
+<body>
+    <p>Todo List Practice 2</p>
+    <input type="text" id="todotext" placeholder="Todo name"> <input type="date" id="date"> <button>Add</button>
+    <div>  </div>
+
+
+
+   <script>
+        const todoOne = []
+
+        document.querySelector('button').onclick = addToList;
+        document.querySelector('#todotext').onkeydown = function() { ( event.key === 'Enter') ? addToList() : null; }
+
+        function renderTodo() {
+            let html = "";
+            const div = document.querySelector('div');
+
+            todoOne.forEach((value, index) => {
+                const htmldilelrmanmd = `
+                    <p>
+                        ${value.name}
+                        ${value.date}
+                        <button onclick="todoOne.splice(${index}, 1); renderTodo();">Delete</button>
+                    </p>
+                `;
+                html += htmldilelrmanmd;
+            }) 
+            div.innerHTML = html;
+        }
+
+        function addToList() {
+            const todo = document.querySelector('#todotext');
+            const todoDate = document.querySelector('#date');
+
+            ( todo.value && todoDate.value )  ? todoOne.push({name: todo.value, date: todoDate.value }) : null;
+            todo.value = '';
+            console.log(todoOne)
+            renderTodo()
+        };
+    
+    </script>
+</body>
+</html>

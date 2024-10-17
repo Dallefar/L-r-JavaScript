@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Rock Paper Scissors</h1>
+    
+    <button onclick="play('Rock')">Rock</button>
+    <button onclick="play('Paper')">Paper</button>
+    <button onclick="play('Scissors')">Scissors</button>
+
+    <p class="GameResult"></p>
+    <p class="Text"></p>
+    <p class="UrStats"></p>
+
+    <button onclick="resetScore()">Reset Score</button>
+
+    <script>   
+        let stats = JSON.parse(localStorage.getItem('stats')) || { wins: 0, losses: 0, ties: 0 };
+        setStatsOnScreen();
+
+        function setStatsOnScreen() { document.querySelector('.UrStats').innerHTML =  `Wins: ${stats.wins}, Loses: ${stats.losses}, Ties: ${stats.ties}` };
+
+        function resetScore() {
+            stats.wins = 0;
+            stats.losses = 0;
+            stats. ties = 0;
+            localStorage.removeItem('stats');
+            setStatsOnScreen();
+        };
+
+        function play(type) {
+            let randomNumber = Math.random();
+            let computerMove = '';
+
+            if ( randomNumber >= 0 && randomNumber < 1 / 3 ) {
+                computerMove = 'Paper';
+            } else if ( randomNumber >= 1 / 3 && randomNumber < 2 / 3 ) {
+                computerMove = 'Scissors';
+            } else {
+                computerMove = 'Rock';
+            };
+
+            if (type === 'Rock') {
+                if (computerMove === 'Rock') {
+                    result = 'Its a Tie.';
+                } else if (computerMove === 'Paper') {
+                    result = 'You lose.';
+                } else if (computerMove === 'Scissors') {
+                    result = 'You Win.';
+                };
+            } else if (type === 'Scissors') {
+                if (computerMove === 'Rock') {
+                    result = 'You lose.';
+                } else if (computerMove === 'Paper') {
+                    result = 'You Win.';
+                } else if (computerMove === 'Scissors') {
+                    result = 'Its a Tie.';
+                };
+            } else if (type === 'Paper') {
+                if (computerMove === 'Rock') {
+                    result = 'You Win.';
+                } else if (computerMove === 'Paper') {
+                    result = 'Its a Tie.';
+                } else if (computerMove === 'Scissors') {
+                    result = 'You lose.';
+                };
+            };
+
+            if ( result === 'You Win.' ) {
+                stats.wins++;
+            } else if ( result === 'You lose.' ) {
+                stats.losses++;
+            } else if ( result === 'Its a Tie.' ) {
+                stats.ties++;
+            };
+
+            document.querySelector('.GameResult').innerHTML = result;
+            document.querySelector('.Text').innerHTML = `You ${type} - ${computerMove} Computer`;
+            localStorage.setItem('stats', JSON.stringify(stats));
+            setStatsOnScreen();
+        }
+
+
+        /* 
+        -- Ternay operator --
+            const dillermand1 = false
+            const dillermand = dillermand1 ? 'I Love Niggers' : 'I Hate Niggers' // If true then it will be "I Love Niggers" else it will be "I hate Niggers"
+            console.log(dillermand)
+
+        -- Booleans and values --
+            Falsy values = 0, '', null, undefined, NaN
+            Turthy values = ALle andre verdier fx. true, 'Hello', [], {}
+
+        -- Et object bliver ikke kopietet, stien bliver bare kopieret/den laver en ny sti --
+
+            const Dillermand = {
+                name: 'Dillermand',
+
+                -- Giver det samme --
+                dillermand: function() {
+                    console.log(this);
+                }
+                dillermand()    {
+                    console.log(this);
+                }
+            };
+
+        -- Giver det sammme --
+            const name = Dillermand.name;
+            const { name } = Dillermand;
+
+        -- Giver det samme --
+            const farmand = {
+                name: name,
+                name,
+            };
+        */
+       
+        // const Dillermand = {
+        //     name: 'Dillermand',
+        // };
+
+
+    </script>
+</body>
+</html>
